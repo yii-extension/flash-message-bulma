@@ -14,15 +14,11 @@
 [![type-coverage](https://shepherd.dev/github/yii-extension/flash-message-bulma/coverage.svg)](https://shepherd.dev/github/yii-extension/flash-message-bulma)
 
 
-## Requirements
-
-The minimum requirement by this project template that your Web server supports PHP 7.4.0.
-
 ## Installation
 
-~~~
+```shell
 composer require yii-extension/flash-message-bulma
-~~~
+```
 
 ## Usage
 
