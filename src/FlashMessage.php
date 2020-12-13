@@ -22,12 +22,30 @@ final class FlashMessage extends Widget
         $flashes = $this->flash->getAll();
         $html = '';
 
+        /** @var array $data */
         foreach ($flashes as $type => $data) {
+            /** @var array $message */
             foreach ($data as $message) {
+                $headerColor = 'is-dark';
+                $headerMessage = '';
+                $bodyMessage = '';
+
+                if (is_string($type)) {
+                    $headerColor = $type;
+                }
+
+                if (isset($message['header']) && is_string($message['header'])) {
+                    $headerMessage = $message['header'];
+                }
+
+                if (isset($message['body']) && is_string($message['body'])) {
+                    $bodyMessage = $message['body'];
+                }
+
                 $html .= Message::widget()
-                    ->headerColor($type)
-                    ->headerMessage($message['header'] ?? '')
-                    ->body($message['body'] ?? '')
+                    ->headerColor($headerColor)
+                    ->headerMessage($headerMessage)
+                    ->body($bodyMessage)
                     ->render();
             }
         }
