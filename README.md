@@ -7,7 +7,7 @@
 </p>
 
 [![Total Downloads](https://poser.pugx.org/yii-extension/flash-message-bulma/downloads.png)](https://packagist.org/packages/yii-extension/flash-message-bulma)
-[![build](https://github.com/yii-extension/flash-message-bulma/workflows/build/badge.svg)](https://github.com/yii-extension/flash-message-bulma/actions)
+[![build](https://github.com/yii-extension/flash-message-bulma/workflows/build/badge.svg?branch=main)](https://github.com/yii-extension/flash-message-bulma/actions)
 [![codecov](https://codecov.io/gh/yii-extension/flash-message-bulma/branch/main/graph/badge.svg?token=KB6T5KMGED)](https://codecov.io/gh/yii-extension/flash-message-bulma)
 [![Mutation testing badge](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fyii-extension%2Fflash-message-bulma%2Fmain)](https://dashboard.stryker-mutator.io/reports/github.com/yii-extension/flash-message-bulma/main)
 [![static analysis](https://github.com/yii-extension/flash-message-bulma/workflows/static%20analysis/badge.svg)](https://github.com/yii-extension/flash-message-bulma/actions?query=workflow%3A%22static+analysis%22)
