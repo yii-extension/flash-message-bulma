@@ -60,7 +60,7 @@ Body 1
 </div>
 HTML;
 
-        $this->assertEquals($expected, $html);
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 
     public function testFlashMessageMultiple(): void
@@ -134,7 +134,7 @@ Body 1
 </div>
 HTML;
 
-        $this->assertEquals($expected, $html);
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 
     public function testFlashMessageDark(): void
@@ -162,7 +162,7 @@ Body 1
 </div>
 HTML;
 
-        $this->assertEquals($expected, $html);
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 
     public function testFlashMessageInfo(): void
@@ -190,7 +190,7 @@ Body 1
 </div>
 HTML;
 
-        $this->assertEquals($expected, $html);
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 
     public function testFlashMessagePrimary(): void
@@ -218,7 +218,7 @@ Body 1
 </div>
 HTML;
 
-        $this->assertEquals($expected, $html);
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 
     public function testFlashMessageSuccess(): void
@@ -246,7 +246,7 @@ Body 1
 </div>
 HTML;
 
-        $this->assertEquals($expected, $html);
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 
     public function testFlashMessageWarning(): void
@@ -274,6 +274,6 @@ Body 1
 </div>
 HTML;
 
-        $this->assertEquals($expected, $html);
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 }

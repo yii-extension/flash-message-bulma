@@ -41,8 +41,8 @@ final class Action
         $flash->add(
             'success', // types: [danger, dark, info, link, primary, success, warning]
             [
-                'header' => 'Header message flash',
-                'body' => 'body message flash'
+                'header' => 'Header message flash', // Its optional.
+                'body' => 'body message flash' // Its mandatory.
             ],
             true
         );

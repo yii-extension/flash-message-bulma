@@ -48,7 +48,7 @@ final class FlashMessage extends Widget
                         $bodyMessage = $message['body'];
                     }
 
-                    if ($headerMessage !== '' || $bodyMessage !== '') {
+                    if ($bodyMessage !== '') {
                         $html .= Message::widget()
                             ->headerColor($this->flashTypes[$type])
                             ->headerMessage($headerMessage)
