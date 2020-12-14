@@ -10,6 +10,16 @@ use Yiisoft\Yii\Bulma\Message;
 
 final class FlashMessage extends Widget
 {
+    private array $flashTypes = [
+        'danger' => 'is-danger',
+        'dark' => 'is-dark',
+        'info' => 'is-info',
+        'link' => 'is-link',
+        'primary' => 'is-primary',
+        'success' => 'is-success',
+        'warning' => 'is-warning',
+    ];
+
     private Flash $flash;
 
     public function __construct(Flash $flash)
@@ -24,29 +34,28 @@ final class FlashMessage extends Widget
 
         /** @var array $data */
         foreach ($flashes as $type => $data) {
-            /** @var array $message */
-            foreach ($data as $message) {
-                $headerColor = 'is-dark';
-                $headerMessage = '';
-                $bodyMessage = '';
+            if (isset($this->flashTypes[$type]) && is_string($this->flashTypes[$type])) {
+                /** @var array $message */
+                foreach ($data as $message) {
+                    $headerMessage = '';
+                    $bodyMessage = '';
 
-                if (is_string($type)) {
-                    $headerColor = $type;
+                    if (isset($message['header']) && is_string($message['header'])) {
+                        $headerMessage = $message['header'];
+                    }
+
+                    if (isset($message['body']) && is_string($message['body'])) {
+                        $bodyMessage = $message['body'];
+                    }
+
+                    if ($headerMessage !== '' || $bodyMessage !== '') {
+                        $html .= Message::widget()
+                            ->headerColor($this->flashTypes[$type])
+                            ->headerMessage($headerMessage)
+                            ->body($bodyMessage)
+                            ->render();
+                    }
                 }
-
-                if (isset($message['header']) && is_string($message['header'])) {
-                    $headerMessage = $message['header'];
-                }
-
-                if (isset($message['body']) && is_string($message['body'])) {
-                    $bodyMessage = $message['body'];
-                }
-
-                $html .= Message::widget()
-                    ->headerColor($headerColor)
-                    ->headerMessage($headerMessage)
-                    ->body($bodyMessage)
-                    ->render();
             }
         }
 

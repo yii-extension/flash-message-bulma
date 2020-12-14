@@ -39,7 +39,7 @@ final class Action
     public function index(Flash $flash): ResponseInterface
     {
         $flash->add(
-            'is-success',
+            'success', // types: [danger, dark, info, link, primary, success, warning]
             [
                 'header' => 'Header message flash',
                 'body' => 'body message flash'
