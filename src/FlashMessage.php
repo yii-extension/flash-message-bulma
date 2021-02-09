@@ -53,6 +53,7 @@ final class FlashMessage extends Widget
                             ->headerColor($this->flashTypes[$type])
                             ->headerMessage($headerMessage)
                             ->body($bodyMessage)
+                            ->options(['encode' => false])
                             ->render();
                     }
                 }
