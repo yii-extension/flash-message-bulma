@@ -11,7 +11,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": "^7.4|8.0",
+        "php": "^7.4|^8.0",
         "yiisoft/session": "^1.0",
         "yiisoft/yii-bulma": "^1.0@dev"
     },
