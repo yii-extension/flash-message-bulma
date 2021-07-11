@@ -2,11 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Yii\Extension\Widget;
+namespace Yii\Extension\Bulma;
 
-use Yiisoft\Session\Flash\Flash;
-use Yiisoft\Widget\Widget;
-use Yiisoft\Yii\Bulma\Message;
+use Yiisoft\Session\Flash\FlashInterface;
 
 final class FlashMessage extends Widget
 {
@@ -19,10 +17,9 @@ final class FlashMessage extends Widget
         'success' => 'is-success',
         'warning' => 'is-warning',
     ];
+    private FlashInterface $flash;
 
-    private Flash $flash;
-
-    public function __construct(Flash $flash)
+    public function __construct(FlashInterface $flash)
     {
         $this->flash = $flash;
     }
@@ -50,10 +47,9 @@ final class FlashMessage extends Widget
 
                     if ($bodyMessage !== '') {
                         $html .= Message::widget()
+                            ->body($bodyMessage)
                             ->headerColor($this->flashTypes[$type])
                             ->headerMessage($headerMessage)
-                            ->body($bodyMessage)
-                            ->options(['encode' => false])
                             ->render();
                     }
                 }

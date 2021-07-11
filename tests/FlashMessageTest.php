@@ -2,15 +2,38 @@
 
 declare(strict_types=1);
 
-namespace Yii\Extension\Widget\Tests;
+namespace Yii\Extension\Bulma\Tests;
 
-use Yii\Extension\Widget\FlashMessage;
+use PHPUnit\Framework\TestCase;
+use Yii\Extension\Bulma\FlashMessage;
+use Yii\Extension\Bulma\Tests\TestSupport\TestTrait;
+use Yiisoft\Session\Flash\Flash;
+use Yiisoft\Session\Flash\FlashInterface;
+use Yiisoft\Session\Session;
 
 /**
  * @runTestsInSeparateProcesses
  */
 final class FlashMessageTest extends TestCase
 {
+    use TestTrait;
+
+    private FlashInterface $flash;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->flash = new Flash(new Session([0], null));
+    }
+
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+
+        unset($this->flash);
+    }
+
     public function testFlashMessageEmpty(): void
     {
         $this->flash->add(
@@ -22,8 +45,7 @@ final class FlashMessageTest extends TestCase
             true,
         );
 
-        $html = FlashMessage::widget()->render();
-
+        $html = FlashMessage::widget([$this->flash])->render();
         $this->assertEquals('', $html);
     }
 
@@ -46,20 +68,18 @@ final class FlashMessageTest extends TestCase
             true,
         );
 
-        $html = FlashMessage::widget()->render();
-
+        $html = FlashMessage::widget([$this->flash])->render();
         $expected = <<<HTML
-<div id="w1-message" class="message is-success">
-<div class="message-header">
-<p>Header 1</p>
-<button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
-</div>
-<div class="message-body">
-Body 1
-</div>
-</div>
-HTML;
-
+        <div id="w0-message" class="message is-success">
+        <div class="message-header">
+        <p>Header 1</p>
+        <button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="message-body">
+        Body 1
+        </div>
+        </div>
+        HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
 
@@ -73,7 +93,6 @@ HTML;
             ],
             true
         );
-
         $this->flash->add(
             'danger',
             [
@@ -84,28 +103,26 @@ HTML;
         );
 
 
-        $html = FlashMessage::widget()->render();
-
+        $html = FlashMessage::widget([$this->flash])->render();
         $expected = <<<HTML
-<div id="w1-message" class="message is-success">
-<div class="message-header">
-<p>Header 1</p>
-<button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
-</div>
-<div class="message-body">
-Body 1
-</div>
-</div><div id="w2-message" class="message is-danger">
-<div class="message-header">
-<p>Header 2</p>
-<button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
-</div>
-<div class="message-body">
-Body 2
-</div>
-</div>
-HTML;
-
+        <div id="w0-message" class="message is-success">
+        <div class="message-header">
+        <p>Header 1</p>
+        <button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="message-body">
+        Body 1
+        </div>
+        </div><div id="w1-message" class="message is-danger">
+        <div class="message-header">
+        <p>Header 2</p>
+        <button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="message-body">
+        Body 2
+        </div>
+        </div>
+        HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
 
@@ -120,27 +137,25 @@ HTML;
             true,
         );
 
-        $html = FlashMessage::widget()->render();
-
+        $html = FlashMessage::widget([$this->flash])->render();
         $expected = <<<HTML
-<div id="w1-message" class="message is-danger">
-<div class="message-header">
-<p>Header 1</p>
-<button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
-</div>
-<div class="message-body">
-Body 1
-</div>
-</div>
-HTML;
-
+        <div id="w0-message" class="message is-danger">
+        <div class="message-header">
+        <p>Header 1</p>
+        <button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="message-body">
+        Body 1
+        </div>
+        </div>
+        HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
 
     public function testFlashMessageDark(): void
     {
         $this->flash->add(
-            'dark',
+            'primary',
             [
                 'header' => 'Header 1',
                 'body' =>  'Body 1',
@@ -148,20 +163,18 @@ HTML;
             true,
         );
 
-        $html = FlashMessage::widget()->render();
-
+        $html = FlashMessage::widget([$this->flash])->render();
         $expected = <<<HTML
-<div id="w1-message" class="message is-dark">
-<div class="message-header">
-<p>Header 1</p>
-<button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
-</div>
-<div class="message-body">
-Body 1
-</div>
-</div>
-HTML;
-
+        <div id="w0-message" class="message is-primary">
+        <div class="message-header">
+        <p>Header 1</p>
+        <button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="message-body">
+        Body 1
+        </div>
+        </div>
+        HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
 
@@ -176,20 +189,18 @@ HTML;
             true,
         );
 
-        $html = FlashMessage::widget()->render();
-
+        $html = FlashMessage::widget([$this->flash])->render();
         $expected = <<<HTML
-<div id="w1-message" class="message is-info">
-<div class="message-header">
-<p>Header 1</p>
-<button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
-</div>
-<div class="message-body">
-Body 1
-</div>
-</div>
-HTML;
-
+        <div id="w0-message" class="message is-info">
+        <div class="message-header">
+        <p>Header 1</p>
+        <button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="message-body">
+        Body 1
+        </div>
+        </div>
+        HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
 
@@ -204,20 +215,18 @@ HTML;
             true,
         );
 
-        $html = FlashMessage::widget()->render();
-
+        $html = FlashMessage::widget([$this->flash])->render();
         $expected = <<<HTML
-<div id="w1-message" class="message is-primary">
-<div class="message-header">
-<p>Header 1</p>
-<button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
-</div>
-<div class="message-body">
-Body 1
-</div>
-</div>
-HTML;
-
+        <div id="w0-message" class="message is-primary">
+        <div class="message-header">
+        <p>Header 1</p>
+        <button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="message-body">
+        Body 1
+        </div>
+        </div>
+        HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
 
@@ -232,24 +241,22 @@ HTML;
             true,
         );
 
-        $html = FlashMessage::widget()->render();
-
+        $html = FlashMessage::widget([$this->flash])->render();
         $expected = <<<HTML
-<div id="w1-message" class="message is-success">
-<div class="message-header">
-<p>Header 1</p>
-<button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
-</div>
-<div class="message-body">
-Body 1
-</div>
-</div>
-HTML;
-
+        <div id="w0-message" class="message is-success">
+        <div class="message-header">
+        <p>Header 1</p>
+        <button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="message-body">
+        Body 1
+        </div>
+        </div>
+        HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
 
-    public function testFlashMessageWarning(): void
+    public function testWarning(): void
     {
         $this->flash->add(
             'warning',
@@ -260,20 +267,18 @@ HTML;
             true,
         );
 
-        $html = FlashMessage::widget()->render();
-
+        $html = FlashMessage::widget([$this->flash])->render();
         $expected = <<<HTML
-<div id="w1-message" class="message is-warning">
-<div class="message-header">
-<p>Header 1</p>
-<button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
-</div>
-<div class="message-body">
-Body 1
-</div>
-</div>
-HTML;
-
+        <div id="w0-message" class="message is-warning">
+        <div class="message-header">
+        <p>Header 1</p>
+        <button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="message-body">
+        Body 1
+        </div>
+        </div>
+        HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
 }
